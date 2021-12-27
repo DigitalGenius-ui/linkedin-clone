@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Head from './components/header/Head';
+import AddPost from './components/sideBar/posts/AddPost';
+import Feed from './pages/Feed';
 
 function App() {
+  const [openPopUp, setOpenPopUp] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Head/>
+      <Feed setOpenPopUp={setOpenPopUp}/>
+      {openPopUp && <AddPost 
+      setOpenPopUp={setOpenPopUp}/>}
     </div>
   );
 }
