@@ -1,25 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PostBar from '../components/sideBar/posts/PostBar';
 import AddBar from '../components/sideBar/add/AddBar';
 import ProfileBar from '../components/sideBar/profile/ProfileBar';
 import "../App.css";
 import Head from '../components/header/Head';
-import { useNavigate } from 'react-router-dom';
-import { LinkedInState } from '../context/Context';
 
 const Feed = () => {
-
-    const navigate = useNavigate();
-
-    const { isAuth } = LinkedInState();
-
-    useEffect(() => {
-        if(!isAuth){
-            navigate("/login");
-        }
-    },[]);
-
     return (
         <>
         <Wrapper>

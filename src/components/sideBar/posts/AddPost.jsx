@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 import ClearIcon from '@material-ui/icons/Clear';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';

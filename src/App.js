@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import AddPost from './components/sideBar/posts/AddPost';
 import Feed from './pages/Feed';
 import Login from './components/auth/Login';
@@ -20,7 +20,7 @@ function App() {
       else setIsAuth(null);
     });
     return unsubscribe;
-  }, []);
+  });
 
 
   return (

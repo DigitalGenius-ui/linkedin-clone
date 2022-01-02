@@ -67,15 +67,6 @@ const Input = styled.div`
         color: #5d5d5d;
     }
 `
-const Image = styled.img`
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    @media(max-width : 420px){
-        width: 2.8rem;
-        height: 2.8rem;
-    }
-`
 
 const Icons = styled.div`
     display: flex;

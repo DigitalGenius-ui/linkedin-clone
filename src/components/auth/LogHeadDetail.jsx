@@ -35,7 +35,7 @@ const LogHeadDetail = () => {
                 </Right>
                 <Left>
                     <div>
-                        <img src="https://cdn.dribbble.com/users/838440/screenshots/6786782/haveacoffe-dribb.jpg?compress=1&resize=800x600" alt="photo" />
+                        <img src="https://cdn.dribbble.com/users/838440/screenshots/6786782/haveacoffe-dribb.jpg?compress=1&resize=800x600" alt="profile" />
                     </div>
                 </Left>
             </Container>

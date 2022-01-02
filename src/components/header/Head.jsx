@@ -58,7 +58,7 @@ const Head = () => {
                         <DropDownIcon Arrow={ArrowDropDownOutlined} text="work"Icon = {MoreHorizOutlined}/></div>
                         <div className="flex">
                         <div><DropDownIcon Arrow={ArrowDropDownOutlined} text="work"Icon = {AppsRounded}/></div>
-                        <div><a href="#">
+                        <div><a href="https://https://github.com/DigitalGenius-ui/linkedin-clone">
                         <p>Try Premium for</p>    
                         <p>free</p>    
                         </a>

@@ -29,12 +29,11 @@ const SinglePost = () => {
 
     const getPost = async () => {
             const data = await getDocs(collectionRef);
-            console.log(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
             setPostLists(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
         };
     useEffect(() => {
         getPost();
-    },[]);
+    });
 
     return (
         <>
