@@ -110,10 +110,7 @@ const Header = styled.div`
 const Flex = styled(Header)``
 
 const Profile = styled.div``
-const Image = styled.img`
-    width: 3rem;
-    height: 3rem;
-`
+
 const Texts = styled.div`
     margin-left : 0.5rem;
     line-height : 1rem;
