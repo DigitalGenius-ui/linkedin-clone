@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PostBar from '../components/sideBar/posts/PostBar';
 import AddBar from '../components/sideBar/add/AddBar';
 import ProfileBar from '../components/sideBar/profile/ProfileBar';
+import "../App.css";
+import Head from '../components/header/Head';
+import { useNavigate } from 'react-router-dom';
+import { LinkedInState } from '../context/Context';
 
-const Feed = ({setOpenPopUp}) => {
+const Feed = () => {
+
+    const navigate = useNavigate();
+
+    const { isAuth } = LinkedInState();
+
+    useEffect(() => {
+        if(!isAuth){
+            navigate("/login");
+        }
+    },[]);
+
     return (
-        <Container>
-            <div className='profile'>
-                <ProfileBar/>
-            </div>
-            <div className="post">
-                <PostBar setOpenPopUp={setOpenPopUp}/>
-            </div>
-            <div className="add">
-                <AddBar/>
-            </div>
-        </Container>
+        <>
+        <Wrapper>
+            <Head />
+            <Container>
+                <div className='profile'>
+                    <ProfileBar/>
+                </div>
+                <div className="post">
+                    <PostBar/>
+                </div>
+                <div className="add">
+                    <AddBar/>
+                </div>
+            </Container>
+        </Wrapper>
+        </>
     )
 }
 
@@ -49,7 +69,6 @@ const Container = styled.div`
         flex : 1.3;
         }
     }
-    }
     .post{
         flex : 3;
     }
@@ -60,3 +79,4 @@ const Container = styled.div`
         }
     }
 `
+const Wrapper = styled.div``

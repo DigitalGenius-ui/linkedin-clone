@@ -1,21 +1,17 @@
 import React,{useState, useRef, useEffect} from 'react';
-import { Home, LinkedIn, Search, Work } from '@material-ui/icons';
-import GroupIcon from '@material-ui/icons/Group';
-import ChatIcon from '@material-ui/icons/Chat';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
-import AppsRoundedIcon from '@material-ui/icons/AppsRounded';
-import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
+import { Notifications, AccountCircle, ArrowDropDownOutlined, AppsRounded,
+MoreHorizOutlined, Home, LinkedIn, Search, Work, Group, Chat } from '@material-ui/icons';
 import styled from 'styled-components';
 import { Container } from '@material-ui/core';
 import Icons from './Icons';
 import DropDownIcon from './DropDownIcon';
+import LogOut from '../auth/LogOut';
 
 const Head = () => {
     const [search, setSearch] = useState("");
     const [open, setOpen] = useState(false);
     const [navigation, setNavigation] = useState(false);
+    const [logOut, setLogOut] = useState(false);
     const inputRef = useRef();
     const inputOPen = () => {
         setOpen(true);
@@ -48,19 +44,20 @@ const Head = () => {
                     <Navigation >
                         <span onClick={inputOPen} className="searchIcon"><Icons Icon = {Search} text="search"/></span>
                         <span><Icons Icon = {Home} text="home"/></span>
-                        <span><Icons Icon = {GroupIcon} text="my network"/></span>
+                        <span><Icons Icon = {Group} text="my network"/></span>
                         <span><Icons Icon = {Work} text="jobs"/></span>
-                        <span><Icons Icon = {ChatIcon} text="messaging"/></span>
-                        <span><Icons Icon = {NotificationsIcon} text="notifications"/></span>
-                        <span ><DropDownIcon Arrow={ArrowDropDownOutlinedIcon} text="me"Icon = {AccountCircleIcon}/></span>
+                        <span><Icons Icon = {Chat} text="messaging"/></span>
+                        <span><Icons Icon = {Notifications} text="notifications"/></span>
+                        <span onClick={() => setLogOut(!logOut)}><DropDownIcon Arrow={ArrowDropDownOutlined} text="me"Icon = {AccountCircle}/></span>
+                        {logOut ? (<span className="logout"><LogOut/></span>): null}
                     </Navigation>
                         <WorkPart navigation={navigation}>
                         <div className="dots"
                         onClick={() => setNavigation(!navigation)}
                         >
-                        <DropDownIcon Arrow={ArrowDropDownOutlinedIcon} text="work"Icon = {MoreHorizOutlinedIcon}/></div>
+                        <DropDownIcon Arrow={ArrowDropDownOutlined} text="work"Icon = {MoreHorizOutlined}/></div>
                         <div className="flex">
-                        <div><DropDownIcon Arrow={ArrowDropDownOutlinedIcon} text="work"Icon = {AppsRoundedIcon}/></div>
+                        <div><DropDownIcon Arrow={ArrowDropDownOutlined} text="work"Icon = {AppsRounded}/></div>
                         <div><a href="#">
                         <p>Try Premium for</p>    
                         <p>free</p>    
@@ -76,13 +73,14 @@ const Head = () => {
 
 export default Head
 
+
 const Nav = styled.div`
     background-color: white;
     position: sticky;
     top : 0;
     right : 0;
     left : 0;
-    z-index : 1000;
+    z-index : 10000;
 `
 
 const Flex = styled.div`
@@ -99,7 +97,7 @@ const Flex = styled.div`
         top : 0;
         background-color : #0c0c0c75;
         display : ${props => props.open ? "block" : "none"};
-        z-index : -1; 
+        /* z-index : -1;  */
     }
     @media(max-width : 1100px){
         width: 100%;
@@ -128,6 +126,7 @@ const Logo = styled.div`
 const Navigation = styled.div`
     display: flex;
     align-items: center;
+    position : relative;
     span{
         margin : 0 1rem;
         padding : 0.5rem 0;
@@ -146,6 +145,11 @@ const Navigation = styled.div`
         @media(max-width : 1000px){
             display: inline;
         }
+    }
+    .logout{
+        position: absolute;
+        right: -1rem;
+        top : 3.3rem;
     }
 `
 
@@ -178,6 +182,7 @@ const SearchBackground = styled.div`
         background-color: white;
         padding : 0.6rem 0.5rem;
         display : ${props => props.open ? "inline" : "none"};
+        z-index: 1000;
     }
     @media(max-width : 710px){
         padding : 0.4rem 0.5rem;

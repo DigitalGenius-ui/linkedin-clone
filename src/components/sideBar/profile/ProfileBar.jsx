@@ -3,25 +3,21 @@ import styled from 'styled-components';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import StopIcon from '@material-ui/icons/Stop';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import { Avatar } from '@material-ui/core';
+import { LinkedInState } from '../../../context/Context';
 
 const ProfileBar = () => {
-
-    const width = () => {
-        if(window.scroll(0,750)){
-            return;
-        }
-    }
-
+    const { isAuth } = LinkedInState();
     return (
         <>
         <Container>
             <div className='bg'></div>
             <div className='relative'>
-                <img className='profile' src="https://media-exp1.licdn.com/dms/image/C5603AQFjc7n5TbGxlw/profile-displayphoto-shrink_100_100/0/1627832721786?e=1645660800&v=beta&t=82VcWVDld6EZy26Y4b00nHleEDq7gi6XT66DIwVjHKg" alt="milad" />
+                <Avatar className="profile"/>
             </div>
             <div className='detail'>
-                <h1>Milad Amiri</h1>
-                <p>student</p>
+                <h1>{isAuth.email}</h1>
+                <p>for test</p>
             </div>
             <Connection>
                 <div>
@@ -40,17 +36,17 @@ const ProfileBar = () => {
             </Item>
         </Container>
         <Sticky>
-            <div className={`${width() ? "sticky" :"discover"}`}>
+            <div className="discover">
                 <div className='group'>
                     <div>Groups</div>
                     <div>Events</div>
                     <div>Followed Hashtags</div>
                 </div>
-                <button>Discover More</button>
+                <button className='btn'>Discover More</button>
             </div>
         </Sticky>
         </>
-    )
+    );
 }
 
 export default ProfileBar
@@ -154,15 +150,15 @@ const Sticky = styled.div`
     }
     .group{
         padding : 0.5rem;
-    }
-    div{
+        div{
         font-size: 0.7rem;
         padding : 0.2rem 0;
         color : #067bc8;
         font-weight: 500;
         cursor : pointer;
     }
-    button{
+    }
+    .btn{
         width : 100%;
         border : none;
         padding : 0.8rem 0;
@@ -173,5 +169,9 @@ const Sticky = styled.div`
         &:hover{
         background-color: #d8d8d8;
         border-top: 1px solid #d8d8d8;
+        padding : 0.8rem 0;
+        }
     }
 `
+
+

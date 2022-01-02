@@ -11,43 +11,56 @@ import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import Liked from './Liked';
 import Reactions from './Reactions';
-import { useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { auth, db } from '../../firebase';
+import { Avatar } from '@material-ui/core';
+import { LinkedInState } from '../../../context/Context';
 
 const SinglePost = () => {
-    const [postLists, setPostLists] = useState([]);
-    const [more, setMore] = useState(false);
 
     const collectionRef = collection(db, "post");
-    useEffect(() => {
-        const getPost = async () => {
+    const { postLists, setPostLists } = LinkedInState();
+    const { isAuth } = LinkedInState();
+
+    const deletePost = async (id) => {
+        const postDoc = doc(db, "post", id);
+        await deleteDoc(postDoc);
+    }
+
+    const getPost = async () => {
             const data = await getDocs(collectionRef);
-            setPostLists(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
             console.log(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
-        }
+            setPostLists(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
+        };
+    useEffect(() => {
         getPost();
     },[]);
 
     return (
         <>
-            {postLists.map((list) => {
-                return(
-            <Container key={list.id}>
+        {postLists.map((list) => {
+            return <Container key={list.id}>
             <Header>
                 <Flex>
                     <Profile>
-                        <Image src={"https://media-exp1.licdn.com/dms/image/C5603AQFjc7n5TbGxlw/profile-displayphoto-shrink_100_100/0/1627832721786?e=1645660800&v=beta&t=82VcWVDld6EZy26Y4b00nHleEDq7gi6XT66DIwVjHKg"} alt="milad"/>
+                        <Avatar width="2rem" height ="2rem"/>
                     </Profile>
                     <Texts>
-                        <h5>Milad Amiri</h5>
-                        <div>miladamiri01</div>
+                        <h5>{list.author.email}</h5>
+                        <div>for test</div>
                         <div className="day">2d.<PublicIcon style={{fontSize : "0.9rem", marginLeft : "0.1rem"}}/></div>
                     </Texts>
                 </Flex>
-                <Icon>
-                    <MoreHorizOutlinedIcon/>
+                {isAuth && list.author.id === auth.currentUser.uid &&
+                <Icon className="removeIcon">
+                    <MoreHorizOutlinedIcon
+                    style={{cursor : "pointer"}}
+                    />
+                     <Remove className="removeBtn" onClick={() => deletePost(list.id)}>
+                    Remove
+                    </Remove>
                 </Icon>
+                }
             </Header>
             <Detail>
             <p>
@@ -75,11 +88,10 @@ const SinglePost = () => {
                 <div><Reactions text="send" Icon = {SendOutlinedIcon}/></div>
             </Reaction>
         </Container>
-                );
-            })}
+        })}    
         </>
-    )
-}
+    );
+    }
 
 export default SinglePost
 
@@ -89,6 +101,7 @@ const Container = styled.div`
     border-radius: 10px;
     padding: 0.6rem 0.7rem 0.5rem 0.7rem;
     width : 100%;
+    position : relative; 
 `
 const Header = styled.div`
     display: flex;
@@ -120,16 +133,27 @@ const Texts = styled.div`
 `
 const Icon = styled.div``
 
+const Remove = styled.div`
+    position : absolute;
+    right : 0.9rem;
+    padding : 0.3rem 0.4rem;
+    top : 2rem;
+    font-size : 0.8rem;
+    background-color : white;
+    box-shadow: 0px 0px 3px 0.5px black;
+    cursor : pointer;
+`
+
 const Detail = styled.div`
     font-size : 0.8rem;
     margin : 0.5rem 0;
     line-height : 1.2rem;
 `
 
-const PostPhoto = styled.div``
-const Photo = styled.img`
-    width : 100%;
-`
+// const PostPhoto = styled.div``
+// const Photo = styled.img`
+//     width : 100%;
+// `
 
 const Like = styled.div`
     display : flex;

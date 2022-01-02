@@ -13,5 +13,17 @@
 }
 
 body{
-  background-color: #e7e7e7;
+  background-color: #eeeded;
+}
+
+.removeBtn{
+  display: none;
+}
+
+.removeIcon{
+  height : 1.5rem;
+}
+
+.removeIcon:hover .removeBtn{
+  display: flex;
 }

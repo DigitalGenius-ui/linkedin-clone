@@ -1,22 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import ClearIcon from '@material-ui/icons/Clear';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { auth, db } from '../../firebase';
+import { LinkedInState } from '../../../context/Context';
 
-const AddPost = ({setOpenPopUp}) => {
+const AddPost = () => {
 
     const [input, setInput] = useState('');
 
     // should make collections
     const collectionRef = collection(db, "post");
 
-    const addPost  = async () => {
-        await addDoc(collectionRef, {input});
+    const { setOpenPopUp } = LinkedInState();
+
+    const addPost = async () => {
         setOpenPopUp(false);
         setInput('');
+        await addDoc(collectionRef, {input, author : {email : auth.currentUser.email, id : auth.currentUser.uid}});
     }
 
     return (
