@@ -19,14 +19,20 @@ export default Logo
 const LogHeadLogo = styled.div`
     display : flex;
     align-items: center;
-    pointer-events: none;
+    cursor: pointer;
     .logo {
         font-size : 1.8rem;
         font-weight: bold;
         color : blue;
+        @media(max-width : 443px){
+            font-size : 1.5rem;
+        }
     }
     .linkedin{
         font-size: 2.2rem;
         color: blue;
+        @media(max-width : 443px){
+            font-size : 1.8rem;
+        }
     }
 `

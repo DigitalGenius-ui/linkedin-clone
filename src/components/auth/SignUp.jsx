@@ -45,7 +45,7 @@ const SignUp = () => {
     return (
         <Container>
             <Header>
-                <Logo/>
+                <div onClick={() => navigate("/")}><Logo/></div>
                 <h1>Make the most of your professional life</h1>
             </Header>
             <Form>
@@ -89,6 +89,13 @@ const Header = styled(Container)`
         font-weight: 400;
         padding : 1rem 0;
         font-size : 1.7rem;
+        @media(max-width : 510px){
+        width : 90%;
+        margin : 0 auto;
+        }
+    }
+    @media(max-width : 510px){
+        text-align : center;
     }
 `
 
@@ -100,6 +107,9 @@ const Form = styled.div`
     margin : 0 auto;
     padding : 1.5rem;
     border-radius : 10px;
+    @media(max-width : 450px){
+        width : 90%;
+    }
     label{
         font-size : 0.8rem;
         color : #555;
@@ -108,6 +118,7 @@ const Form = styled.div`
     input{
         padding : 0.3rem ;
         margin-bottom : 1rem;
+        border : 1px solid #555;
     }
     .agree{
         font-size : 0.7rem;

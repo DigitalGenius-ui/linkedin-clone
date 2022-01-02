@@ -52,6 +52,12 @@ const Container = styled.div`
     max-width : 1100px;
     margin : 0 auto;
     padding-top : 4rem;
+    @media(max-width : 1024px){
+        width : 90%;
+    }
+    @media(max-width : 1024px){
+        flex-direction: column;
+    }
 `
 const Right = styled.div`
     flex: 1.4;
@@ -59,6 +65,10 @@ const Right = styled.div`
         color: #550404b3;
         font-weight: 200;
         margin-bottom : 3rem;
+        @media(max-width : 600px){
+            text-align : center;
+            font-size : 2.4rem;
+        }
     }
     .search{
         display : flex;
@@ -76,10 +86,24 @@ const Right = styled.div`
             -webkit-box-shadow: -4px 7px 31px -21px rgba(23,23,23,0.75);
             -moz-box-shadow: -4px 7px 31px -21px rgba(23,23,23,0.75);
         }
+        @media(max-width : 1024px){
+            width : 100%;
+        }
     }
 `
 const Left = styled.div`
     flex: 1;
+    div{
+        position: relative;
+        @media(max-width : 1024px){
+            display: flex;
+            align-items : center;
+            justify-content: center;
+            width: 38rem;
+            height: 38rem;
+            width : 100%;
+        }
+    }
     img{
         z-index : 10;
         position : absolute;
@@ -88,6 +112,14 @@ const Left = styled.div`
         height : 30rem;
         object-fit: cover;
         z-index : -1;
+        @media(max-width : 687px){
+            width : 100%;
+        }
+        @media(max-width : 471px){
+            top : 0;
+            width : 20rem;
+            height : 20rem;
+        }
     }
 `
 
@@ -97,4 +129,13 @@ const Wrapper = styled.div`
     overflow: hidden;
     z-index : -1;
     position : relative;
+    @media(max-width : 1024px){
+        height  :100vh;
+    }
+    @media(max-width : 411px){
+        height  :760px;
+    }
+    @media(max-width : 375px){
+        height  :750px;
+    }
 `

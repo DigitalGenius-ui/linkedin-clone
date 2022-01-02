@@ -9,7 +9,7 @@ const LogHead = () => {
     return (
         <Headline>
             <Contain>
-                <Logo />
+                <Logo/>
                 <IconsFlex>
                     <HeadIcon>
                         <span><Icons Icon = {ExploreOutlined} text ="discover"/></span>
@@ -41,6 +41,9 @@ const Contain = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media(max-width : 990px){
+        width : 90%;
+    }
 `
 
 const HeadIcon = styled.div`
@@ -48,6 +51,9 @@ const HeadIcon = styled.div`
     align-items: center;
     span{
         margin-right: 1.7rem;
+        @media(max-width : 487px){
+            margin-right: 1rem;
+        }
     }
 `
 
@@ -65,6 +71,14 @@ const HeadButton = styled.div`
         font-weight: 500;
         font-size : 0.9rem;
         text-decoration : none;
+        @media(max-width : 495px){
+            padding : 0.4rem 0.6rem;
+            font-size : 0.7rem;
+        }
+        @media(max-width : 375px){
+            padding : 0.3rem 0.5rem;
+            font-size : 0.5rem;
+        }
     &:nth-child(1){
         border : none;
         background-color: transparent;
@@ -80,11 +94,21 @@ const HeadButton = styled.div`
     background-color: transparent;
     color : darkblue;
     transition: 300ms ease-in-out;
+    @media(max-width : 495px){
+        padding : 0.4rem 1rem;
+    }
+    @media(max-width : 375px){
+        padding : 0.3rem 0.7rem;
+    }
     &:hover{
         background-color: #87cfeb57;
         box-shadow:0px 0px 0px 1px darkblue inset;
     }
     }
+    }
+    @media(max-width : 615px){
+        display : flex;
+        flex-direction : column;
     }
         
 `

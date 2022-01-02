@@ -44,7 +44,7 @@ const Login = () => {
         <Wrapper>
             <Container>
                 <Header>
-                    <Logo />
+                    <div onClick={() => navigate("/")}><Logo/></div>
                 </Header>   
                 <Form >
                     <div className='title'>
@@ -101,6 +101,9 @@ const Form = styled.div`
     box-shadow: 0px 0px 31px -9px rgba(0,0,0,0.45);
     -webkit-box-shadow: 0px 0px 31px -9px rgba(0,0,0,0.45);
     -moz-box-shadow: 0px 0px 31px -9px rgba(0,0,0,0.45);
+    @media(max-width : 436px){
+       width : 90%;
+    }
     button{
         border-radius : 50px;
         color : white;
@@ -123,6 +126,9 @@ const Form = styled.div`
         h1{
             font-size: 1.8rem;
             font-weight: 500;
+            @media(max-width : 365px){
+                font-size: 1.5rem;
+            }
         }
         span{
             font-size : 0.8rem;
