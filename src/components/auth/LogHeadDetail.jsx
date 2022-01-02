@@ -129,6 +129,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     z-index : -1;
     position : relative;
+    height  :700vh;
     @media(max-width : 1024px){
         height  :100vh;
     }
