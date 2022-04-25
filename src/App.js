@@ -32,7 +32,7 @@ function App() {
         {!isAuth && <Route path="/" element={<LogHeadDetail/>}/>}
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<SignUp />}/>
-        <Route path="*" element={<Navigate to={isAuth ? "/feed" : "/login"}/>}/>
+        <Route path="*" element={<Navigate to={isAuth ? "/feed" : "/"}/>}/>
       </Routes>
     </Router>
   );
