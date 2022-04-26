@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import styled from 'styled-components';
 import PublicIcon from '@material-ui/icons/Public';
@@ -11,34 +11,24 @@ import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import Liked from './Liked';
 import Reactions from './Reactions';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 import { Avatar } from '@material-ui/core';
 import { LinkedInState } from '../../../context/Context';
 
-const SinglePost = () => {
-
-    const collectionRef = collection(db, "post");
-    const { postLists, setPostLists } = LinkedInState();
-    const { isAuth } = LinkedInState();
-
-    const deletePost = async (id) => {
-        const postDoc = doc(db, "post", id);
-        await deleteDoc(postDoc);
+const SinglePost = ({list, id}) => {
+    const {isAuth} = LinkedInState();
+    const removeItem = async () => {
+        const remove = doc(collection(db, "post"), id);
+        try {
+            await deleteDoc(remove)
+        } catch (error) {
+         console.log(error.message)   
+        }
     }
-
-    const getPost = async () => {
-            const data = await getDocs(collectionRef);
-            setPostLists(data.docs.map((doc) => ({...doc.data(), id : doc.id})));
-        };
-    useEffect(() => {
-        getPost();
-    });
-
     return (
         <>
-        {postLists.map((list) => {
-            return <Container key={list.id}>
+            <Container>
             <Header>
                 <Flex>
                     <Profile>
@@ -55,7 +45,9 @@ const SinglePost = () => {
                     <MoreHorizOutlinedIcon
                     style={{cursor : "pointer"}}
                     />
-                     <Remove className="removeBtn" onClick={() => deletePost(list.id)}>
+                     <Remove className="removeBtn"
+                     onClick={removeItem}
+                     >
                     Remove
                     </Remove>
                 </Icon>
@@ -86,8 +78,7 @@ const SinglePost = () => {
                 <div><Reactions text="share" Icon = {ShareOutlinedIcon}/></div>
                 <div><Reactions text="send" Icon = {SendOutlinedIcon}/></div>
             </Reaction>
-        </Container>
-        })}    
+        </Container> 
         </>
     );
     }

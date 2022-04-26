@@ -8,6 +8,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import SinglePost from './SinglePost';
 import { LinkedInState } from '../../../context/Context';
 import { Avatar } from '@material-ui/core';
+import Post from './Post';
 
 const PostBar = () => {
     const { setOpenPopUp } = LinkedInState();
@@ -30,7 +31,7 @@ const PostBar = () => {
             </Icons>
         </Container>
         <Wrapper>
-            <SinglePost/>
+            <Post/>
         </Wrapper>
         </>
     )

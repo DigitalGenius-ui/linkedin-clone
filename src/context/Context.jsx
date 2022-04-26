@@ -5,7 +5,6 @@ const LinkedInContext = createContext();
 const Context = (props) => {
     const [openPopUp, setOpenPopUp] = useState(false);
     const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
-    const [postLists, setPostLists] = useState([]);
     const [errorMessage, setErrorMessage] = useState({
     open : false,
     message : "",
@@ -16,7 +15,6 @@ const Context = (props) => {
             openPopUp, setOpenPopUp,
             isAuth, setIsAuth,
             errorMessage, setErrorMessage,
-            postLists, setPostLists
         }}>
             {props.children}
         </LinkedInContext.Provider>

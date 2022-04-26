@@ -10,22 +10,28 @@ import { LinkedInState } from '../../../context/Context';
 const AddPost = () => {
 
     const [input, setInput] = useState('');
-
-    // should make collections
-    const collectionRef = collection(db, "post");
-
     const { setOpenPopUp } = LinkedInState();
 
-    const addPost = async () => {
-        setOpenPopUp(false);
-        setInput('');
-        await addDoc(collectionRef, {input, author : {email : auth.currentUser.email, id : auth.currentUser.uid}});
+    const submitHandler = async (e) =>{
+        e.preventDefault();
+        setOpenPopUp(false)
+        try {
+            const res = await addDoc(collection(db, "post"), {
+                input,
+                time : new Date(),
+                author : {email : auth.currentUser.email, id : auth.currentUser.uid}
+            });
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+        }
     }
+
 
     return (
         <Container>
             <Background onClick={() => setOpenPopUp(false)}></Background>
-                <Area>
+                <form onSubmit={submitHandler}>
                     <Header>
                         <div><p>Create a Post</p></div>
                         <ClearIcon onClick={() => setOpenPopUp(false)} style={{cursor : "pointer"}}/>
@@ -38,9 +44,9 @@ const AddPost = () => {
                             <div><PhotoSizeSelectActualIcon style={{fontSize : "1.2rem", color : "#000000a0"}}/></div>
                             <div><YouTubeIcon style={{ color : "#000000a0", fontSize : "1.6rem"}}/></div>
                         </Icons>
-                        <button onClick={addPost}>Post</button>
+                        <button>Post</button>
                     </Footer>
-                </Area>
+                </form>
         </Container>
     )
 }
@@ -54,6 +60,15 @@ const Container = styled.div`
     bottom : 0;
     left: 0;
     z-index: 100000;
+    form{
+        background-color: white;
+        width: 30rem;
+        margin: 2rem auto;
+        border-radius : 10px;
+        @media(max-width : 507px){
+        width : 95%;
+        }
+    }
 `
 const Text = styled.div`
     padding : 0.5rem 1rem;
@@ -70,16 +85,6 @@ const Header = styled.div`
     justify-content: space-between;
     padding: 1rem;
     border-bottom : 1px solid #00000037;
-`
-
-const Area = styled.div`
-    background-color: white;
-    width: 30rem;
-    margin: 2rem auto;
-    border-radius : 10px;
-    @media(max-width : 507px){
-        width : 95%;
-    }
 `
 const Background = styled.div`
     background-color: #00000071;
